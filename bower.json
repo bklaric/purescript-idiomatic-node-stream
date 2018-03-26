@@ -1,0 +1,22 @@
+{
+  "name": "purescript-idiomatic-node-stream",
+  "description": "An idiomatic wrapper for Node's Stream API.",
+  "homepage": "https://github.com/bklaric/purescript-idiomatic-node-stream",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bklaric/purescript-idiomatic-node-stream.git"
+  },
+  "license": "AGPL-3.0",
+  "version": "0.2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "output"
+  ],
+  "dependencies": {
+    "purescript-idiomatic-node-events": "^0.2.0",
+    "purescript-idiomatic-node-buffer": "^0.1.0",
+    "purescript-nullable": "^3.0.0"
+  }
+}
