@@ -16,7 +16,7 @@
   ],
   "dependencies": {
     "purescript-idiomatic-node-events": "^0.2.0",
-    "purescript-idiomatic-node-buffer": "^0.1.0",
+    "purescript-idiomatic-node-buffer": "^0.2.0",
     "purescript-nullable": "^3.0.0"
   }
 }
