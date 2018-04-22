@@ -34,7 +34,8 @@ module Node.Stream.Readable
 import Prelude
 
 import Data.Foreign (Foreign)
-import Data.Nullable (Nullable)
+import Data.Maybe (Maybe)
+import Data.Nullable (Nullable, toMaybe)
 import Effect (Effect)
 import Node.Buffer (Buffer)
 import Node.Encoding (Encoding, toNodeString)
@@ -49,7 +50,7 @@ class EE.EventEmitter readable <= Readable readable where
     readableLength :: readable -> Effect Int
     isPaused :: readable -> Effect Boolean
     pause :: readable -> Effect readable
-    read :: Int -> readable -> Effect (Nullable Foreign)
+    read :: Int -> readable -> Effect (Maybe Foreign)
     resume :: readable -> Effect readable
     pipe :: forall writable. W.Writable writable =>
         writable -> Boolean -> readable -> Effect writable
@@ -68,8 +69,11 @@ foreign import defaultIsPaused :: forall readable. readable -> Effect Boolean
 
 foreign import defaultPause :: forall readable. readable -> Effect readable
 
-foreign import defaultRead :: forall readable.
+foreign import defaultReadImpl :: forall readable.
     Int -> readable -> Effect (Nullable Foreign)
+
+defaultRead :: forall readable. Int -> readable -> Effect (Maybe Foreign)
+defaultRead size readable = defaultReadImpl size readable <#> toMaybe
 
 foreign import defaultResume :: forall readable. readable -> Effect readable
 
@@ -93,7 +97,7 @@ foreign import defaultDestroy :: forall readable.
     Error -> readable -> Effect readable
 
 read_ :: forall readable. Readable readable =>
-    readable -> Effect (Nullable Foreign)
+    readable -> Effect (Maybe Foreign)
 read_ readable = read undefined readable
 
 readBuffer :: forall readable. Readable readable =>
