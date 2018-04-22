@@ -34,7 +34,7 @@ foreign import defaultUncork :: forall writable.
 foreign import defaultWrite :: forall writable.
     Foreign -> Effect Unit -> writable -> Effect Boolean
 
-foreign import defaultEnd :: forall writable effects.
+foreign import defaultEnd :: forall writable.
     Foreign -> Effect Unit -> writable -> Effect Boolean
 
 foreign import defaultDestroy :: forall writable.

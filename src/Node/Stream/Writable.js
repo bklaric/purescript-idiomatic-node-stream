@@ -1,7 +1,5 @@
 "use strict";
 
-exports.undefined = undefined
-
 exports.defaultWritableHighWaterMark = function (stream) {
     return stream.writableHighWaterMark
 }
