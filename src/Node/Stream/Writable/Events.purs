@@ -2,7 +2,7 @@ module Node.Stream.Writable.Events where
 
 import Prelude
 
-import Control.Monad.Effect (Effect)
+import Effect (Effect)
 import Node.Events.Event (Event(..))
 import Node.Stream.Readable (class Readable)
 import Node.Stream.Writable (class Writable)

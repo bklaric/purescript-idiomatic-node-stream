@@ -2,14 +2,13 @@ module Node.Stream.Writable where
 
 import Prelude
 
-import Control.Monad.Effect (Effect)
-import Control.Monad.Effect.Exception (Error)
 import Data.Foreign (Foreign, toForeign)
+import Effect (Effect)
 import Node.Buffer (Buffer, fromString)
 import Node.Encoding (Encoding(..))
+import Node.Errors (Error)
 import Node.Events.EventEmitter (class EventEmitter)
-
-foreign import undefined :: forall a. a
+import Undefined (undefined)
 
 class EventEmitter writable <= Writable writable where
     writableHighWaterMark :: writable -> Effect Int

@@ -33,14 +33,15 @@ module Node.Stream.Readable
 
 import Prelude
 
-import Control.Monad.Effect (Effect)
-import Control.Monad.Effect.Exception (Error)
 import Data.Foreign (Foreign)
 import Data.Nullable (Nullable)
+import Effect (Effect)
 import Node.Buffer (Buffer)
 import Node.Encoding (Encoding, toNodeString)
+import Node.Errors (Error)
 import Node.Events.EventEmitter as EE
 import Node.Stream.Writable as W
+import Undefined (undefined)
 import Unsafe.Coerce (unsafeCoerce)
 
 class EE.EventEmitter readable <= Readable readable where
@@ -93,7 +94,7 @@ foreign import defaultDestroy :: forall readable.
 
 read_ :: forall readable. Readable readable =>
     readable -> Effect (Nullable Foreign)
-read_ readable = read W.undefined readable
+read_ readable = read undefined readable
 
 readBuffer :: forall readable. Readable readable =>
     Int -> readable -> Effect (Nullable Buffer)
@@ -101,7 +102,7 @@ readBuffer size readable = unsafeCoerce $ read size readable
 
 readBuffer_ :: forall readable. Readable readable =>
     readable -> Effect (Nullable Buffer)
-readBuffer_ readable = readBuffer W.undefined readable
+readBuffer_ readable = readBuffer undefined readable
 
 readString :: forall readable. Readable readable =>
     Int -> readable -> Effect (Nullable String)
@@ -109,7 +110,7 @@ readString size readable = unsafeCoerce $ read size readable
 
 readString_ :: forall readable. Readable readable =>
     readable -> Effect (Nullable String)
-readString_ readable = readString W.undefined readable
+readString_ readable = readString undefined readable
 
 pipe_ :: forall readable writable.
     Readable readable => W.Writable writable =>
@@ -144,4 +145,4 @@ instance writableUndefinedWritable :: W.Writable UndefinedWritable where
     destroy = W.defaultDestroy
 
 unpipe_ :: forall readable. Readable readable => readable -> Effect Unit
-unpipe_ readable = unpipe (W.undefined :: UndefinedWritable) readable
+unpipe_ readable = unpipe (undefined :: UndefinedWritable) readable

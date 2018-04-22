@@ -2,7 +2,7 @@ module Node.Stream.Readable.Events where
 
 import Prelude
 
-import Control.Monad.Effect (Effect)
+import Effect (Effect)
 import Data.Foreign (Foreign)
 import Node.Buffer (Buffer)
 import Node.Events.Event (Event(..))
