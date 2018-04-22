@@ -18,7 +18,7 @@ exports.defaultIsPaused = function (readable) {
     }
 }
 
-exports.defaultRead = function (size) {
+exports.defaultReadImpl = function (size) {
     return function (readable) {
         return function () {
             return readable.read(size)

@@ -1,0 +1,11 @@
+{
+  "name": "purescript-idiomatic-node-stream",
+  "set": "master",
+  "source": "https://github.com/bklaric/package-sets.git",
+  "depends": [
+    "idiomatic-node-events",
+    "idiomatic-node-buffer",
+    "idiomatic-node-errors",
+    "nullable"
+  ]
+}
