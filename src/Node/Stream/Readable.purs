@@ -22,11 +22,6 @@ module Node.Stream.Readable
     , defaultSetEncoding
     , defaultUnshift
     , defaultDestroy
-    , read_
-    , readBuffer
-    , readBuffer_
-    , readString
-    , readString_
     , pipe_
     , unpipe_
     ) where
@@ -37,13 +32,11 @@ import Data.Foreign (Foreign)
 import Data.Maybe (Maybe)
 import Data.Nullable (Nullable, toMaybe)
 import Effect (Effect)
-import Node.Buffer (Buffer)
 import Node.Encoding (Encoding, toNodeString)
 import Node.Errors (Error)
 import Node.Events.EventEmitter as EE
 import Node.Stream.Writable as W
 import Undefined (undefined)
-import Unsafe.Coerce (unsafeCoerce)
 
 class EE.EventEmitter readable <= Readable readable where
     readableHighWaterMark :: readable -> Effect Int
@@ -95,26 +88,6 @@ foreign import defaultUnshift :: forall readable.
 
 foreign import defaultDestroy :: forall readable.
     Error -> readable -> Effect readable
-
-read_ :: forall readable. Readable readable =>
-    readable -> Effect (Maybe Foreign)
-read_ readable = read undefined readable
-
-readBuffer :: forall readable. Readable readable =>
-    Int -> readable -> Effect (Nullable Buffer)
-readBuffer size readable = unsafeCoerce $ read size readable
-
-readBuffer_ :: forall readable. Readable readable =>
-    readable -> Effect (Nullable Buffer)
-readBuffer_ readable = readBuffer undefined readable
-
-readString :: forall readable. Readable readable =>
-    Int -> readable -> Effect (Nullable String)
-readString size readable = unsafeCoerce $ read size readable
-
-readString_ :: forall readable. Readable readable =>
-    readable -> Effect (Nullable String)
-readString_ readable = readString undefined readable
 
 pipe_ :: forall readable writable.
     Readable readable => W.Writable writable =>
