@@ -6,6 +6,7 @@
     "idiomatic-node-events",
     "idiomatic-node-buffer",
     "idiomatic-node-errors",
-    "nullable"
+    "nullable",
+    "refs"
   ]
 }
