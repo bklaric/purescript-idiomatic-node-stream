@@ -28,15 +28,15 @@ readable = Event "readable"
 
 readDataEvents :: forall readable. Readable readable =>
     (Foreign -> Effect Unit) -> Effect Unit -> readable -> Effect readable
-readDataEvents dataListener endListener readable = do
-    readable
+readDataEvents dataListener endListener readable' = do
+    readable'
     # on' data' dataListener
     >>= on' end endListener
 
 collectDataEvents :: forall readable. Readable readable =>
     (Array Foreign -> Effect Unit) -> readable -> Effect readable
-collectDataEvents endListener readable = do
+collectDataEvents endListener readable' = do
     streamData <- newRef ([] :: Array Foreign)
-    readable # readDataEvents
+    readable' # readDataEvents
         (\eventData -> modifyRef streamData (flip snoc eventData))
         (readRef streamData >>= endListener)
