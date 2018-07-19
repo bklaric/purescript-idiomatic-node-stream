@@ -2,10 +2,10 @@ module Node.Stream.Readable.Events where
 
 import Prelude
 
-import Control.Monad.Effect.Ref (modifyRef, newRef, readRef)
 import Data.Array (snoc)
-import Data.Foreign (Foreign)
 import Effect (Effect)
+import Effect.Ref (modify, new, read)
+import Foreign (Foreign)
 import Node.Events.Event (Event(..))
 import Node.Events.EventEmitter (on')
 import Node.Stream.Readable (class Readable)
@@ -36,7 +36,7 @@ readDataEvents dataListener endListener readable' = do
 collectDataEvents :: forall readable. Readable readable =>
     (Array Foreign -> Effect Unit) -> readable -> Effect readable
 collectDataEvents endListener readable' = do
-    streamData <- newRef ([] :: Array Foreign)
+    streamData <- new ([] :: Array Foreign)
     readable' # readDataEvents
-        (\eventData -> modifyRef streamData (flip snoc eventData))
-        (readRef streamData >>= endListener)
+        (\eventData -> streamData # modify (flip snoc eventData) # void)
+        (read streamData >>= endListener)

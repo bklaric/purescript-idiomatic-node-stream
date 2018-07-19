@@ -1,0 +1,33 @@
+{
+  "name": "purescript-idiomatic-node-stream",
+  "homepage": "https://github.com/bklaric/purescript-idiomatic-node-stream",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bklaric/purescript-idiomatic-node-stream"
+  },
+  "authors": [
+    "Branimir Klarić <branimir.klaric.bk@gmail.com>"
+  ],
+  "description": "An idiomatic wrapper for Node's Stream API.",
+  "main": "",
+  "keywords": [
+    "purescript",
+    "node",
+    "stream"
+  ],
+  "license": "AGPL-3.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "purescript-idiomatic-node-events": "^0.4.0",
+    "purescript-idiomatic-node-buffer": "^0.4.0",
+    "purescript-nullable": "^4.0.0",
+    "purescript-refs": "^4.1.0",
+    "purescript-idiomatic-node-errors": "^0.3.0"
+  }
+}

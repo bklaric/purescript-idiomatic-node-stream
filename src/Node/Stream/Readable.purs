@@ -28,7 +28,7 @@ module Node.Stream.Readable
 
 import Prelude
 
-import Data.Foreign (Foreign)
+import Foreign (Foreign)
 import Data.Maybe (Maybe)
 import Data.Nullable (Nullable, toMaybe)
 import Effect (Effect)
