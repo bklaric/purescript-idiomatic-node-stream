@@ -2,8 +2,8 @@ module Node.Stream.Writable where
 
 import Prelude
 
-import Data.Foreign (Foreign, toForeign)
 import Effect (Effect)
+import Foreign (Foreign, unsafeToForeign)
 import Node.Buffer (Buffer, fromString)
 import Node.Encoding (Encoding(..))
 import Node.Errors (Error)
@@ -43,11 +43,11 @@ foreign import defaultDestroy :: forall writable.
 writeBuffer :: forall writable. Writable writable =>
     Buffer -> Effect Unit -> writable -> Effect Boolean
 writeBuffer buffer callback writable =
-    write (toForeign buffer) callback writable
+    write (unsafeToForeign buffer) callback writable
 
 writeBuffer_ :: forall writable. Writable writable =>
     Buffer -> writable -> Effect Boolean
-writeBuffer_ buffer writable = write (toForeign buffer) (pure unit) writable
+writeBuffer_ buffer writable = write (unsafeToForeign buffer) (pure unit) writable
 
 writeString :: forall writable. Writable writable =>
     String -> Encoding -> Effect Unit -> writable -> Effect Boolean
@@ -75,15 +75,15 @@ end_ toWrite writable = end toWrite (pure unit) writable
 
 end__ :: forall writable. Writable writable =>
     writable -> Effect Boolean
-end__ writable = end (toForeign "") (pure unit) writable
+end__ writable = end (unsafeToForeign "") (pure unit) writable
 
 endBuffer :: forall writable. Writable writable =>
     Buffer -> Effect Unit -> writable -> Effect Boolean
-endBuffer buffer callback writable = end (toForeign buffer) callback writable
+endBuffer buffer callback writable = end (unsafeToForeign buffer) callback writable
 
 endBuffer_ :: forall writable. Writable writable =>
     Buffer -> writable -> Effect Boolean
-endBuffer_ buffer writable = end (toForeign buffer) (pure unit) writable
+endBuffer_ buffer writable = end (unsafeToForeign buffer) (pure unit) writable
 
 endString :: forall writable. Writable writable =>
     String -> Encoding -> Effect Unit -> writable -> Effect Boolean
